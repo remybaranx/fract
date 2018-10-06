@@ -1,0 +1,24 @@
+import QtQuick 2.9
+import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.3
+
+import "../conf/"
+
+Label {
+    id: title
+
+    font : Style.controlFont
+    color: "white"
+
+    verticalAlignment: Text.AlignVCenter
+    horizontalAlignment: Text.AlignHCenter
+
+    Layout.fillWidth: true
+
+    topPadding: 5
+    bottomPadding: 5
+
+    background: Rectangle {
+        color: "dodgerblue"
+    }
+}

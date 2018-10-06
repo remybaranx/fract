@@ -1,0 +1,36 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="main.qml">src/qml/main.qml</file>
+        <file alias="pages/showsessions.qml">src/qml/pages/showsessions.qml</file>
+        <file alias="pages/startsession.qml">src/qml/pages/startsession.qml</file>
+        <file alias="pages/editsession.qml">src/qml/pages/editsession.qml</file>
+        <file alias="pages/settings.qml">src/qml/pages/settings.qml</file>
+
+        <file alias="library/CustomToolbar.qml">src/qml/library/CustomToolbar.qml</file>
+        <file alias="library/CustomToolButton.qml">src/qml/library/CustomToolButton.qml</file>
+        <file alias="library/ExtendedMouseArea.qml">src/qml/library/ExtendedMouseArea.qml</file>
+        <file alias="library/Separator.qml">src/qml/library/Separator.qml</file>
+
+        <file alias="library/ActivityViewer.qml">src/qml/library/ActivityViewer.qml</file>
+        <file alias="library/ActivityControler.qml">src/qml/library/ActivityControler.qml</file>
+
+        <file alias="library/FractCircleButton.qml">src/qml/library/FractCircleButton.qml</file>
+        <file alias="library/FractPrePostSessionEditor.qml">src/qml/library/FractPrePostSessionEditor.qml</file>
+        <file alias="library/SessionEditor.qml">src/qml/library/SessionEditor.qml</file>
+        <file alias="library/InfoEditor.qml">src/qml/library/InfoEditor.qml</file>
+        <file alias="library/FractToolbar.qml">src/qml/library/FractToolbar.qml</file>
+        <file alias="library/FractLabel.qml">src/qml/library/FractLabel.qml</file>
+        <file alias="library/FractTextInput.qml">src/qml/library/FractTextInput.qml</file>
+        <file alias="library/FractComboBox.qml">src/qml/library/FractComboBox.qml</file>
+        <file alias="library/FractButton.qml">src/qml/library/FractButton.qml</file>
+        <file alias="library/FractSwitch.qml">src/qml/library/FractSwitch.qml</file>
+        <file alias="library/FractEditorTitle.qml">src/qml/library/FractEditorTitle.qml</file>
+        <file alias="library/FractStepValue.qml">src/qml/library/FractStepValue.qml</file>
+        <file alias="library/FractSimpleStep.qml">src/qml/library/FractSimpleStep.qml</file>
+        <file alias="library/FractGroupStep.qml">src/qml/library/FractGroupStep.qml</file>
+
+        <file alias="conf/Style.qml">src/qml/conf/Style.qml</file>
+        <file alias="conf/Conf.qml">src/qml/conf/Conf.qml</file>
+        <file alias="conf/qmldir">src/qml/conf/qmldir</file>
+    </qresource>
+</RCC>
