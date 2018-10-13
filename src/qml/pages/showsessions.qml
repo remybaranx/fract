@@ -1,13 +1,14 @@
 import QtQuick 2.9
-import QtQuick.Controls 2.3
+import QtQuick.Controls 2.4
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.11
 
 import "../library/"
 import "../conf/"
 
-import com.fract.model 1.0
-
+/**
+ * This view displays all the sessions already existing in the sessions file
+ */
 Item {
     id: root
 
@@ -16,6 +17,7 @@ Item {
         pageText: qsTr("Sessions")
     }
 
+    /* to fill the whole view with the background color */
     Rectangle {
         color: Style.bgColor
 
@@ -24,132 +26,71 @@ Item {
         anchors.top: toolbar.bottom
         anchors.bottom: root.bottom
 
+        /* the list view to display all the sessions */
         ListView {
             id: sessionsListView
             anchors.fill: parent
+            snapMode: ListView.SnapToItem
             clip: true
 
-//            model: sessionModel
+            /* model imported from C++ declaration */
+            model: appData.sessions
 
-            model : ListModel {
-                ListElement {
-                    name: "30/30"
-                    description: "Le classique du fractionné"
-                }
-                ListElement {
-                    name: "30/30"
-                    description: "Le classique du fractionné"
-                }
-                ListElement {
-                    name: "30/30"
-                    description: "Le classique du fractionné"
-                }
-                ListElement {
-                    name: "30/30"
-                    description: "Le classique du fractionné"
-                }
-                ListElement {
-                    name: "30/30"
-                    description: "Le classique du fractionné"
-                }
-                ListElement {
-                    name: "30/30"
-                    description: "Le classique du fractionné"
-                }
-                ListElement {
-                    name: "30/30"
-                    description: "Le classique du fractionné"
-                }
-                ListElement {
-                    name: "30/30"
-                    description: "Le classique du fractionné"
-                }
-                ListElement {
-                    name: "30/30"
-                    description: "Le classique du fractionné"
-                }
-                ListElement {
-                    name: "30/30"
-                    description: "Le classique du fractionné"
-                }
-                ListElement {
-                    name: "30/30"
-                    description: "Le classique du fractionné"
-                }
-                ListElement {
-                    name: "30/30"
-                    description: "Le classique du fractionné"
-                }
-                ListElement {
-                    name: "30/30"
-                    description: "Le classique du fractionné"
-                }
-                ListElement {
-                    name: "30/30"
-                    description: "Le classique du fractionné"
-                }
-            }
-
+            /* delegate to display each session */
             delegate: Rectangle {
                 width: parent.width
                 color: "transparent"
-                height: 60
+                height: 80
 
-                Rectangle {
+               ColumnLayout {
+				   id: sessionItem
                    anchors.fill: parent
                    anchors.topMargin: 5
                    anchors.bottomMargin: 5
                    anchors.leftMargin: 10
                    anchors.rightMargin: 10
-                   color: parent.color
 
-                   ColumnLayout {
-                       Text {
-//                            text: modelData.name
-                            text: name
-                            font.pointSize: 16
-                            color: Style.textColor
-                        }
-                        Text {
-                            text: description
-//                            text: modelData.description
-                            font.pointSize: 12
-                            color: Style.textColor
-                        }
-                   }
-                }
+                   Text {
+                        text: modelData.name
+                        font.pointSize: 18
+                        color: Style.textColor
+                    }
+                    Text {
+                        text: modelData.description
+                        font.pointSize: 14
+                        color: Style.textColor
+                    }
+               }
 
                 // use a rectangle to draw a line between element
                 Separator {
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.bottom: parent.bottom
-                    anchors.leftMargin: 15
-                    anchors.rightMargin: 15
+                    anchors.leftMargin: 10
+                    anchors.rightMargin: 10
 
                     color: Style.lineColor
                 }
 
+                /* to add short and long clicks support to the delegate */
                 ExtendedMouseArea {
-                    onShortClicked: stackView.push(Qt.resolvedUrl("startsession.qml"),  {session: name})
-                    onLongClicked: stackView.push(Qt.resolvedUrl("editsession.qml"),  {session: name})
+                    onShortClicked : stackView.push(Qt.resolvedUrl("startsession.qml"), {"sessionIndex": index, "session": sessionModel[index]})
+                    onLongClicked  : stackView.push(Qt.resolvedUrl("editsession.qml"),  {"sessionIndex": index, "session": sessionModel[index]})
                 }
             }
         }
 
+        /* a button to be able to add a new session */
         FractCircleButton {
             id: addButton
             anchors.bottom: parent.bottom
             anchors.right: parent.right
-            anchors.margins: 20
-            radius: 24
-            bgColor: Style.buttonBgColor
-            textColor: Style.controlTextColor
-            font.pointSize: 14
+            anchors.margins: 30
+            radius: 30
+			font.pointSize: 32
+			font.weight: Font.Thin
             text: "+"
-//            text: "\u9658" // play
-//            text: "\u9208" // pause
-//            text: "\u9609" // stop
             onClicked: stackView.push(Qt.resolvedUrl("editsession.qml"))
         }
     }

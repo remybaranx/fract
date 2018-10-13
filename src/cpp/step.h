@@ -5,7 +5,6 @@
 #include <QObject>
 #include <QJsonObject>
 #include <QVector>
-#include "types.h"
 
 /**
  * @brief A step in a session, that can be a distance (in meters) or a duration (in seconds)
@@ -13,12 +12,13 @@
 class Step : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(Kind kind READ kind WRITE setKind NOTIFY kindChanged)
+    Q_PROPERTY(Unit    unit  READ unit  WRITE setUnit  NOTIFY unitChanged)
     Q_PROPERTY(quint16 value READ value WRITE setValue NOTIFY valueChanged)
+    Q_PROPERTY(QString info  READ info  WRITE setInfo  NOTIFY infoChanged)
 
 public:
-    enum Kind {DISTANCE_STEP, DURATION_STEP};
-    Q_ENUM(Kind)
+    enum Unit {DISTANCE_IN_M, DISTANCE_IN_KM, DURATION_IN_SEC, DURATION_IN_MIN};
+    Q_ENUM(Unit)
 
 public:
     Step(QObject* _parent = nullptr);
@@ -28,19 +28,23 @@ public:
 
     static bool Parse (const QJsonObject& _json, Step& _step);
 
-    void setKind(const Kind& _kind);
+    void setUnit(const Unit& _unit);
     void setValue(const quint16& _value);
+    void setInfo(const QString& _info);
 
-    Kind kind();
-    quint16 value();
+    Unit unit() const;
+    quint16 value() const;
+    QString info() const;
 
 signals:
-    void kindChanged();
+    void unitChanged();
     void valueChanged();
+    void infoChanged();
 
 private:
-    Kind       	 m_kind;	/**< the kind of the step */
+    Unit         m_unit;	/**< the unit of the step */
     quint16      m_value;   /**< the value associated to the step */
+    QString      m_info;    /**< */
 };
 
 typedef QVector<Step> StepVector;

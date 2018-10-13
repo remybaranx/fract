@@ -18,7 +18,7 @@ ToolButton {
         id: textComponent
         text            : root.text
         color           : root.textColor
-        font            : font
+        font            : root.font
 
         horizontalAlignment : Text.AlignHCenter
         verticalAlignment   : Text.AlignVCenter

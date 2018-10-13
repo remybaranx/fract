@@ -14,10 +14,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         src/cpp/main.cpp \
-    src/cpp/session.cpp \
-    src/cpp/step.cpp \
-    src/cpp/sessionmodel.cpp \
-    src/cpp/applicationdata.cpp
+        src/cpp/session.cpp \
+        src/cpp/step.cpp \
+        src/cpp/applicationdata.cpp
 
 RESOURCES += qml.qrc
 
@@ -35,6 +34,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     src/cpp/session.h \
     src/cpp/step.h \
-    src/cpp/types.h \
-    src/cpp/sessionmodel.h \
     src/cpp/applicationdata.h

@@ -19,8 +19,8 @@ CustomToolbar {
         }
     }
 
-    color          : Style.toolbarBgColor
-    textColor      : Style.toolbarTextColor
+    color          : Style.controlBgColor
+    textColor      : Style.controlTextColor
     font           : Style.toolbarFont
 
     buttonText: "≡"

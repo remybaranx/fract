@@ -1,25 +1,30 @@
-#ifndef APP_DATA_H
-#define APP_DATA_H
+#ifndef SESSIONMODEL_H
+#define SESSIONMODEL_H
 
-#include "sessionmodel.h"
+#include <QAbstractItemModel>
+#include <QJsonObject>
+
+#include "session.h"
 
 class ApplicationData : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY (QStringList sessionNames READ sessionNames)
+    Q_PROPERTY(QList<QObject*> sessions READ sessions)
+    Q_DISABLE_COPY(ApplicationData)
 
 public:
-    ApplicationData (QObject* _parent = nullptr);
-    ~ApplicationData() {}
+    explicit ApplicationData(QObject* _parent = Q_NULLPTR);
 
-    bool load(const QString& _sessionFilename);
+    bool loadSessions(const QString& _filename);
+    bool saveSessions();
 
-    const QStringList& sessionNames() {return m_sessionNames;}
+    QList<QObject*> sessions() const {return m_sessions;}
 
 private:
-    SessionModel m_sessionModel;
-    QStringList  m_sessionNames;
+    bool _parse(const QJsonObject& _json);
+
+    QString             m_filename;
+    QList<QObject*>     m_sessions;
 };
 
-#endif //APP_DATA_H
-
+#endif // SESSIONMODEL_H

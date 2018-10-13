@@ -8,7 +8,7 @@ import "../library/"
 
 ColumnLayout {
     id: root
-    spacing: 5
+    spacing: Style.spacing
 
     property alias text: title.text
 
@@ -17,12 +17,12 @@ ColumnLayout {
     }
 
     RowLayout {
-        spacing: 5
+        spacing: Style.spacing
 
         FractLabel {
             text: {itemSwitch.checked ? qsTr("Disable") : qsTr("Enable"); }
             Layout.fillHeight: true
-            Layout.minimumWidth: 90
+            Layout.minimumWidth: Style.labelMinWidth
         }
         FractSwitch {
             id: itemSwitch

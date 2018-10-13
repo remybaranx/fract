@@ -6,6 +6,7 @@ import "../conf"
 
 Button {
     id: root
+	font: Style.controlFont
 
     background: Rectangle {
         color: Style.controlBgColor
@@ -14,7 +15,7 @@ Button {
     contentItem: Text {
         text: parent.text
         color: Style.controlTextColor
-        font.pointSize: 12
+        font: root.font
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
     }

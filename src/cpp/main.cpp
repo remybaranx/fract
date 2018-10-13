@@ -4,9 +4,7 @@
 #include <QQmlContext>
 #include <QStandardPaths>
 
-#include "sessionmodel.h"
-#include "session.h"
-#include "step.h"
+#include "applicationdata.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,18 +12,14 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
-    SessionModel sessionModel;
     auto path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    ApplicationData appData;
 
-    /*
-    if (!sessionModel.load(path + "/sessions.json")) {
+    if (!appData.loadSessions(path + "/sessions.json")) {
         return -1;
     }
-    */
-    qmlRegisterType<Session>("com.fract.model", 1, 0, "Session");
-    qmlRegisterType<Step>("com.fract.model", 1, 0, "Step");
 
-    engine.rootContext()->setContextProperty("sessionModel", &sessionModel);
+    engine.rootContext()->setContextProperty("appData", &appData);
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())

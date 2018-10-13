@@ -5,10 +5,12 @@ import QtQuick.Controls 2.3
 import "../conf/"
 
 RowLayout {
-    spacing: 5
+    spacing: Style.spacing
 
     FractLabel {
-        text: qsTr("repetition: ")
+        text: qsTr("Repetition ")
+        Layout.fillHeight: true
+        Layout.minimumWidth: Style.labelMinWidth
     }
     FractTextInput {
         text: series

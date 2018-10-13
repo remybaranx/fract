@@ -53,9 +53,9 @@ ToolBar {
         /** the right button */
         CustomToolButton {
             id: rightButton
-            font    : root.font
-            color       : root.color
-            textColor   : root.textColor
+            font      : root.font
+            color     : root.color
+            textColor : root.textColor
 
             Layout.fillHeight: true
 

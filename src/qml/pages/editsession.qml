@@ -1,34 +1,46 @@
 import QtQuick 2.9
-import QtQuick.Controls 2.3
+import QtQuick.Controls 2.4
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.11
 
 import "../library/"
 import "../conf/"
 
+/**
+ * A view to edit or create a session
+ */
 Item {
     id: root
+
+    property int sessionIndex: -1
 
     FractToolbar {
         id: toolbar
         pageText: qsTr("New session")
     }
 
+    /* a rectangle to fill the view with the background color */
     Rectangle {
-        anchors.left: root.left
-        anchors.right: root.right
+        id: backgroundControl
         anchors.top: toolbar.bottom
-        anchors.bottom: root.bottom
-
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
         color: Style.bgColor
+    }
+
+    /* a Flickable to be able to scroll on all components */
+    Flickable {
+        flickableDirection: Flickable.VerticalFlick
+
+        anchors.fill: backgroundControl
+
+        contentWidth: backgroundControl.width
+        contentHeight: contentItem.childrenRect.height
+        clip: true
 
         ColumnLayout {
-            id: intro
             spacing: 5
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.margins: 10
 
             InfoEditor {
                 id: infoEditor
@@ -43,41 +55,42 @@ Item {
                 id: coolDown
                 text: "Cool down"
             }
-        }
 
-        SessionEditor {
-            id: sessionEditor
-            anchors.top: intro.bottom
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.margins: 10
-        }
-
-        RowLayout {
-            spacing: 0
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            anchors.leftMargin: 10
-            anchors.rightMargin: 10
-
-            FractButton {
-                id: cancelButton
-                Layout.preferredWidth: 120
-                text: "Cancel"
-                onClicked: stackView.pop()
-                Layout.margins: 10
+            SessionEditor {
+                id: sessionEditor
             }
 
-            Item {
-                Layout.fillWidth: true
-            }
+            RowLayout {
+                spacing: 0
 
-            FractButton {
-                id: saveButton
-                Layout.preferredWidth: 120
-                text: "Save"
-                Layout.margins: 10
+                FractButton {
+                    id: cancelButton
+                    text: "Cancel"
+                    Layout.preferredWidth: 80
+                    Layout.margins: 10
+
+                    onClicked: stackView.pop()
+                }
+
+                Item {
+                    Layout.fillWidth: true
+                }
+
+                FractButton {
+                    id: saveButton
+                    text: "Save"
+                    Layout.preferredWidth: 80
+                    Layout.margins: 10
+
+                    onClicked: {
+                        if (sessionIndex >= 0) {
+                            sessionModel[sessionIndex]=session
+                        }
+                        else {
+                            sessionModel.addSession(session)
+                        }
+                    }
+                }
             }
         }
     }

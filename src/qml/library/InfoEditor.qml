@@ -6,8 +6,10 @@ import "../library/"
 import "../conf/"
 
 ColumnLayout {
-    spacing: 5
-    id: root
+    spacing: Style.spacing
+
+    property alias sessionName: sessionName.text
+    property alias sessionDescription: sessionDescription.text
 
     FractEditorTitle {
         id: title
@@ -15,28 +17,30 @@ ColumnLayout {
     }
 
     RowLayout {
-        spacing: 5
+        spacing: Style.spacing
 
         FractLabel {
             text: qsTr("Name")
             Layout.fillHeight: true
-            Layout.minimumWidth: 90
+            Layout.minimumWidth: Style.labelMinWidth
         }
         FractTextInput {
+            id: sessionName
             placeholderText: qsTr("Enter the session name")
             Layout.fillWidth: true
         }
     }
 
     RowLayout {
-        spacing: 5
+        spacing: Style.spacing
 
         FractLabel {
             text: qsTr("Description")
             Layout.fillHeight: true
-            Layout.minimumWidth: 90
+            Layout.minimumWidth: Style.labelMinWidth
         }
         FractTextInput {
+            id: sessionDescription
             placeholderText: qsTr("Enter the session description")
             Layout.fillWidth: true
         }

@@ -13,7 +13,9 @@ ColumnLayout {
 
     RowLayout {
         FractLabel {
-            text: qsTr("Info: ")
+            text: qsTr("Info ")
+            Layout.fillHeight: true
+            Layout.minimumWidth: Style.labelMinWidth
         }
         FractTextInput {
             text: info

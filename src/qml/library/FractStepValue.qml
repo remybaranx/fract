@@ -7,27 +7,23 @@ import "../conf/"
 import "../library/"
 
 RowLayout {
-    spacing: 5
+    spacing: Style.spacing
 
     property int    stepValue
     property string stepUnit
-
-    FractLabel {
-        text: qsTr("Value")
-        Layout.fillHeight: true
-        Layout.minimumWidth: 90
-    }
+    property string stepInfo
 
     FractTextInput {
         id: valueControl
         text: stepValue
-        Layout.fillWidth: true
+        placeholderText: "Value"
         validator: IntValidator {bottom: 0; top: 9999}
+        Layout.preferredWidth: 60
     }
 
     FractComboBox {
         id: unitControl
-        model: ["m", "km", "min", "sec"]
+        model: Conf.units
 
         Component.onCompleted: {
             var index=unitControl.find(stepUnit);
@@ -35,5 +31,12 @@ RowLayout {
                 unitControl.currentIndex=index;
             }
         }
+        Layout.preferredWidth: 80
+    }
+
+    FractTextInput {
+        placeholderText: "Description"
+        text: stepInfo
+        Layout.fillWidth: true
     }
 }
