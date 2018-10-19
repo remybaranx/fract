@@ -12,10 +12,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += \
-        src/cpp/main.cpp \
-        src/cpp/session.cpp \
-        src/cpp/step.cpp \
+SOURCES +=                          \
+        src/cpp/main.cpp            \
+        src/cpp/session.cpp         \
+        src/cpp/step.cpp            \
         src/cpp/applicationdata.cpp
 
 RESOURCES += qml.qrc
@@ -31,7 +31,7 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-HEADERS += \
-    src/cpp/session.h \
-    src/cpp/step.h \
+HEADERS +=                      \
+    src/cpp/session.h           \
+    src/cpp/step.h              \
     src/cpp/applicationdata.h

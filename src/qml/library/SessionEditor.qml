@@ -22,14 +22,14 @@ ColumnLayout {
         delegate: RowLayout {
 
             FractStepValue {
-                stepUnit  : unit
-                stepValue : value
-                stepInfo  : info
+                stepUnit  : modelData.unit
+                stepValue : modelData.value
+                stepInfo  : modelData.info
             }
 
             FractButton {
                 text: "-"
-                onClicked: stepsModel.remove(index)
+//                onClicked: stepsModel.remove(index)
             }
         }
     }

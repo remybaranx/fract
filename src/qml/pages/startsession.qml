@@ -6,8 +6,6 @@ import QtQuick.Layouts 1.11
 import "../library/"
 import "../conf/"
 
-import com.fract.model 1.0
-
 Item {
     id: root
 

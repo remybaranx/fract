@@ -9,9 +9,9 @@ import "../library/"
 RowLayout {
     spacing: Style.spacing
 
-    property int    stepValue
-    property string stepUnit
-    property string stepInfo
+    property alias   stepValue : valueControl.text
+    property string  stepUnit
+    property alias   stepInfo  : infoControl.text
 
     FractTextInput {
         id: valueControl
@@ -31,10 +31,16 @@ RowLayout {
                 unitControl.currentIndex=index;
             }
         }
+
         Layout.preferredWidth: 80
+
+        onCurrentTextChanged: {
+            stepUnit=currentText
+        }
     }
 
     FractTextInput {
+        id: infoControl
         placeholderText: "Description"
         text: stepInfo
         Layout.fillWidth: true

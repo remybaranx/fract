@@ -4,9 +4,8 @@
 Step::Step(QObject* _parent) : QObject(_parent)
 {
     m_value = 0;
-    m_unit  = DISTANCE_IN_M;
+    m_unit  = "m";
 }
-
 
 //-------------------------------------------------------------------------
 Step::Step(const Step& _step) : QObject()
@@ -16,7 +15,7 @@ Step::Step(const Step& _step) : QObject()
 }
 
 //-------------------------------------------------------------------------
-const Step& Step::operator= (const Step& _step)
+Step& Step::operator= (const Step& _step)
 {
     m_value = _step.m_value;
     m_unit  = _step.m_unit;
@@ -27,34 +26,10 @@ const Step& Step::operator= (const Step& _step)
 //-------------------------------------------------------------------------
 bool Step::Parse (const QJsonObject& _json, Step& _step)
 {
-    Step  l_step;
-
     // ---- parse unit ----
     if (_json.contains("unit") && _json["unit"].isString())
     {
-        QString l_unitStr = _json["unit"].toString();
-
-        if (l_unitStr == "m")
-        {
-            l_step.setUnit(DISTANCE_IN_M);
-        }
-        else if (l_unitStr == "km")
-        {
-            l_step.setUnit(DISTANCE_IN_KM);
-        }
-        else if (l_unitStr == "sec")
-        {
-            l_step.setUnit(DURATION_IN_SEC);
-        }
-        else if (l_unitStr == "min")
-        {
-            l_step.setUnit(DURATION_IN_MIN);
-        }
-        else
-        {
-            qWarning("Invalid 'unit' value in 'Step' element");
-            return false;
-        }
+        _step.m_unit = _json["unit"].toString();
     }
     else
     {
@@ -65,7 +40,7 @@ bool Step::Parse (const QJsonObject& _json, Step& _step)
     // ---- parse value ----
     if (_json.contains("value") && _json["value"].isDouble())
     {
-        l_step.setValue(static_cast<quint16>(_json["value"].toInt(0)));
+        _step.setValue(static_cast<quint16>(_json["value"].toInt(0)));
     }
     else
     {
@@ -73,10 +48,10 @@ bool Step::Parse (const QJsonObject& _json, Step& _step)
         return false;
     }
 
-    // ---- parse value ----
+    // ---- parse info ----
     if (_json.contains("info") && _json["info"].isString())
     {
-        l_step.setInfo(_json["value"].toString());
+        _step.setInfo(_json["info"].toString());
     }
     else
     {
@@ -96,16 +71,24 @@ bool Step::Parse (const QJsonObject& _json, Step& _step)
     }
 
     qDebug("Step successfully loaded!");
-    _step = l_step;
     return true;
 }
 
 //-------------------------------------------------------------------------
-void Step::setUnit(const Unit& _kind)
+void Step::jsonify (QJsonObject& _jsonObject) const
 {
-    if (m_unit != _kind)
+    _jsonObject["unit"]=m_unit;
+    _jsonObject["value"]=m_value;
+    _jsonObject["info"]=m_info;
+    _jsonObject["rest"]=false;
+}
+
+//-------------------------------------------------------------------------
+void Step::setUnit(const QString& _unit)
+{
+    if (m_unit != _unit)
     {
-        m_unit = _kind;
+        m_unit = _unit;
         emit unitChanged();
     }
 }
@@ -131,7 +114,7 @@ void Step::setInfo(const QString& _info)
 }
 
 //-------------------------------------------------------------------------
-Step::Unit Step::unit() const
+QString Step::unit() const
 {
     return m_unit;
 }

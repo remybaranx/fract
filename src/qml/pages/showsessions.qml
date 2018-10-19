@@ -75,8 +75,8 @@ Item {
 
                 /* to add short and long clicks support to the delegate */
                 ExtendedMouseArea {
-                    onShortClicked : stackView.push(Qt.resolvedUrl("startsession.qml"), {"sessionIndex": index, "session": sessionModel[index]})
-                    onLongClicked  : stackView.push(Qt.resolvedUrl("editsession.qml"),  {"sessionIndex": index, "session": sessionModel[index]})
+                    onShortClicked : stackView.push(Qt.resolvedUrl("startsession.qml"), {"sessionIndex": index})
+                    onLongClicked  : stackView.push(Qt.resolvedUrl("editsession.qml"),  {"sessionIndex": index})
                 }
             }
         }

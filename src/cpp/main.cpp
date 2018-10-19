@@ -5,6 +5,8 @@
 #include <QStandardPaths>
 
 #include "applicationdata.h"
+#include "session.h"
+#include "step.h"
 
 int main(int argc, char *argv[])
 {
@@ -18,6 +20,9 @@ int main(int argc, char *argv[])
     if (!appData.loadSessions(path + "/sessions.json")) {
         return -1;
     }
+
+    qmlRegisterType<Session>();
+    qmlRegisterType<Step>();
 
     engine.rootContext()->setContextProperty("appData", &appData);
 
